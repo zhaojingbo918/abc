@@ -25,7 +25,15 @@ namespace StudioX.FilterControls
 
         private FilterCondition _filterCondition;
         private FilterCondition _origionalOne;
+        public FilterItemEditor()
+        {
+            var condition = new FilterCondition() { Mode = ComonStrings.ModeAdvance };
 
+            InitializeComponent();
+            _origionalOne = condition;
+            _filterCondition = ObjectCopyHelper.Clone<FilterCondition>(condition);
+
+        }
         public FilterItemEditor(FilterCondition condition)
         {
 

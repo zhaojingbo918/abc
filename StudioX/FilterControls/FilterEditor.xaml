@@ -16,15 +16,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/Index.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="TextBlock"
-                   x:Key="tbTitle">
-                <Setter Property="FontSize"
-                        Value="12" />
-                <Setter Property="Foreground"
-                        Value="#333" />
-                <Setter Property="VerticalAlignment"
-                        Value="Center" />
-            </Style>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
@@ -45,21 +36,28 @@
                        FontSize="14"
                        Foreground="#333333"
                        Margin="20,0,0,0">
-      <Run Style="{StaticResource StartPageRun1}"
-                FontWeight="Regular"
-                FontSize="15"
-                Foreground="#FF454859"
-                Text="{DynamicResource lanSaveRuleSequence}" />
+
             </TextBlock>
             <Button Style="{StaticResource ContentButton}"
                     HorizontalAlignment="Right"
+                    Margin="0,0,21,0"
                     Cursor="Hand"
                     Click="Button_Click">
-                <TextBlock Text="&#58893;"
-                           Margin="12"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           TextBlock.FontFamily="{StaticResource iconfont}" />
+                <Path Stroke="#ccc"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      StrokeThickness="2">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure StartPoint="0,0">
+                                <LineSegment Point="12,12" />
+                            </PathFigure>
+                            <PathFigure StartPoint="0,12">
+                                <LineSegment Point="12,0" />
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
             </Button>
 
         </Grid>

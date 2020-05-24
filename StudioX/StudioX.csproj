@@ -73,7 +73,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FilterControls\Boolean2VisibilityConverter.cs" />
-    <Compile Include="FilterControls\Class1.cs" />
+    <Compile Include="FilterControls\Enum2ListConverter.cs" />
     <Compile Include="FilterControls\ObjectCopyHelper.cs" />
     <Compile Include="FilterControls\ComonStrings.cs" />
     <Compile Include="FilterControls\Equal2BooleanConverter.cs" />
@@ -103,11 +103,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles\CompairOperators.xaml">
+    <Page Include="Styles\ComboboxStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles\Fonts.xaml">
+    <Page Include="Styles\CompairOperators.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -128,10 +128,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\TextBlockStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\ToggleButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,7 +158,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Resource Include="Styles\iconfont.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

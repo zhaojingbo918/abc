@@ -12,7 +12,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance models:FilterCondition}" Loaded="uc_Loaded">
+        d:DataContext="{d:DesignInstance models:FilterCondition}"
+        Loaded="uc_Loaded">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -22,6 +23,7 @@
 
             <DataTemplate x:Key="dtComboxItemLan">
                 <TextBlock Tag="lanCompairOp"
+                           Margin="11,0,0,0"
                            local:TextBlockHelper.TextResourceKey="{Binding Mode=OneWay}" />
             </DataTemplate>
 
@@ -30,7 +32,7 @@
                 <Setter Property="ItemTemplate"
                         Value="{StaticResource dtComboxItemLan}" />
                 <Setter Property="Margin"
-                        Value="0,5,0,0" />
+                        Value="0,0,0,0" />
                 <Setter Property="Height"
                         Value="24" />
                 <Setter Property="Foreground"
@@ -39,6 +41,8 @@
                         Value="12" />
                 <Setter Property="BorderBrush"
                         Value="#454859" />
+                <Setter Property="Background"
+                        Value="Transparent" />
                 <Setter Property="BorderThickness"
                         Value="1" />
                 <Setter Property="ItemContainerStyle">
@@ -70,13 +74,14 @@
                                        IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}">
                                     <Themes:SystemDropShadowChrome Name="Shdw"
                                                                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                                                                   Color="Transparent"
+                                                                   Color="White"
                                                                    MinWidth="{Binding ActualWidth, ElementName=MainGrid}">
                                         <Border Name="DropDownBorder"
-                                                Background="{DynamicResource SystemColors.WindowBrushKey}"
-                                                BorderBrush="{DynamicResource SystemColors.WindowFrameBrushKey}"
+                                                Background="White"
+                                                BorderBrush="#d9d9d9"
                                                 BorderThickness="1">
-                                            <ScrollViewer Name="DropDownScrollViewer">
+                                            <ScrollViewer Name="DropDownScrollViewer"
+                                                          Template="{StaticResource ScrollViewerControlTemplateInCombobox}">
                                                 <Grid Name="Grid"
                                                       RenderOptions.ClearTypeHint="Enabled">
                                                     <Canvas Name="Canvas"
@@ -165,32 +170,7 @@
 
 
 
-            <Style TargetType="TextBlock"
-                   x:Key="tbCellHeader">
-                <Setter Property="HorizontalAlignment"
-                        Value="Center" />
-                <Setter Property="VerticalAlignment"
-                        Value="Center" />
 
-                <Setter Property="Foreground"
-                        Value="#666666" />
-                <Setter Property="FontSize"
-                        Value="12" />
-            </Style>
-            <Style TargetType="TextBlock"
-                   x:Key="tbCellValue">
-                <Setter Property="HorizontalAlignment"
-                        Value="Left" />
-                <Setter Property="VerticalAlignment"
-                        Value="Center" />
-                <Setter Property="Margin"
-                        Value="14,0,0,0" />
-
-                <Setter Property="Foreground"
-                        Value="#666666" />
-                <Setter Property="FontSize"
-                        Value="12" />
-            </Style>
             <Style TargetType="TextBox"
                    x:Key="tboxCellValue">
                 <Setter Property="HorizontalAlignment"
@@ -237,15 +217,7 @@
                 <Setter Property="Fill"
                         Value="#e7e7e7" />
             </Style>
-            <Style TargetType="TextBlock"
-                   x:Key="tbTitle">
-                <Setter Property="FontSize"
-                        Value="12" />
-                <Setter Property="Foreground"
-                        Value="#333" />
-                <Setter Property="VerticalAlignment"
-                        Value="Center" />
-            </Style>
+
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
@@ -270,13 +242,27 @@
 
             <Button Style="{StaticResource ContentButton}"
                     HorizontalAlignment="Right"
-                    Cursor="Hand"
+                    Cursor="Hand" Margin="0,0,21,0"
                     Click="Button_Click">
-                <TextBlock Text="&#58893;"
-                           Margin="12"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           TextBlock.FontFamily="{StaticResource iconfont}" />
+
+
+
+                <Path Stroke="#ccc"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      StrokeThickness="2">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure StartPoint="0,0">
+                                <LineSegment Point="12,12" />
+                            </PathFigure>
+                            <PathFigure StartPoint="0,12">
+                                <LineSegment Point="12,0" />
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+
             </Button>
 
         </Grid>
@@ -515,6 +501,7 @@
                             <Rectangle Style="{StaticResource recSpliter}" />
                             <ComboBox ItemTemplate="{StaticResource dtComboxItemLan}"
                                       Grid.Column="1"
+                                      Style="{StaticResource cbEnumProperty}"
                                       ItemsSource="{Binding Converter={x:Static local:Enum2ListConverter.Instance}, Source={x:Type models:CompairOperators}}"
                                       SelectedItem="{Binding CompairOperator}" />
                             <Rectangle Style="{StaticResource recSpliter}"
@@ -563,6 +550,7 @@
                             <Rectangle Style="{StaticResource recSpliter}" />
                             <ComboBox ItemTemplate="{StaticResource dtComboxItemLan}"
                                       Grid.Column="1"
+                                      Style="{StaticResource cbEnumProperty}"
                                       ItemsSource="{Binding Converter={x:Static local:Enum2ListConverter.Instance}, Source={x:Type models:CompairOperators}}"
                                       SelectedItem="{Binding CompairOperator}" />
                             <Rectangle Style="{StaticResource recSpliter}"
