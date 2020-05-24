@@ -11,6 +11,7 @@ namespace StudioX.FilterControls.Models
     /// <summary>
     /// 过滤条件
     /// </summary>
+    [Serializable]
     public class FilterCondition : PropertyChangeBase
     {
         private string _mode = ComonStrings.ModeBasic;

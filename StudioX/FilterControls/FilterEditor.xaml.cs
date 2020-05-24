@@ -59,7 +59,11 @@ namespace StudioX.FilterControls
 
         private void BtnConfig_Click(object sender, RoutedEventArgs e)
         {
+            var condition = (sender as FrameworkElement).DataContext as FilterCondition;
 
+
+            var window = new FilterItemEditor(condition);
+            window.ShowDialog();
         }
     }
 }

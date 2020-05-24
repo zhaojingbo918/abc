@@ -9,6 +9,7 @@ namespace StudioX.FilterControls.Models
     /// <summary>
     /// 高级筛选器
     /// </summary>
+    [Serializable]
     public class AdvanceFilter : BaseFilter
     {
         private FilterItem _filterItem1;

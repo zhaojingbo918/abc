@@ -23,13 +23,16 @@ namespace StudioX.FilterControls
     {
         //    private BaseFilter _baseFilter = new AdvanceFilter() { FilterItem1 = new FilterItem() { LeftValue = "值" }, FilterItem2 = new FilterItem() { LeftValue = "值" } };
 
-        private FilterCondition _filterCondition = new FilterCondition() { Mode = ComonStrings.ModeBasic };
+        private FilterCondition _filterCondition;
+        private FilterCondition _origionalOne;
 
-        public FilterItemEditor()
+        public FilterItemEditor(FilterCondition condition)
         {
+
             InitializeComponent();
-            this.DataContext = _filterCondition;
-            this.InitFilter();
+            _origionalOne = condition;
+            _filterCondition = ObjectCopyHelper.Clone<FilterCondition>(condition);
+
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -42,6 +45,8 @@ namespace StudioX.FilterControls
 
         private async void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
+            _origionalOne.Filter = _filterCondition.Filter;
+            _origionalOne.Mode = _filterCondition.Mode;
             this.Close();
         }
 
@@ -57,7 +62,7 @@ namespace StudioX.FilterControls
         /// <param name="e"></param>
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var condition = new FilterItem() { LeftValue = "值", CompairOperator = CompairOperators.Equal };
+            var condition = new FilterItem() { LeftValue = "值", CompairOperator = CompairOperators.Equal.ToString() };
             (_filterCondition.Filter as BasicFilter).Filters.Add(condition);
         }
 
@@ -103,6 +108,12 @@ namespace StudioX.FilterControls
                     };
                 }
             }
+        }
+
+        private void uc_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.DataContext = _filterCondition;
+            this.InitFilter();
         }
     }
 }

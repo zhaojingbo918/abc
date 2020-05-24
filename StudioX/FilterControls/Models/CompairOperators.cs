@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudioX.FilterControls.Models
 {
+    [Serializable]
     public enum CompairOperators
     {
         None, //无

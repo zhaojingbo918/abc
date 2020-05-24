@@ -10,6 +10,7 @@ namespace StudioX.FilterControls.Models
     /// <summary>
     /// 基本筛选器
     /// </summary>
+    [Serializable]
     public class BasicFilter : BaseFilter
     {
         private ObservableCollection<FilterItem> _filters = new ObservableCollection<FilterItem>();

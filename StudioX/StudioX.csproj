@@ -73,6 +73,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FilterControls\Boolean2VisibilityConverter.cs" />
+    <Compile Include="FilterControls\Class1.cs" />
+    <Compile Include="FilterControls\ObjectCopyHelper.cs" />
     <Compile Include="FilterControls\ComonStrings.cs" />
     <Compile Include="FilterControls\Equal2BooleanConverter.cs" />
     <Compile Include="FilterControls\TextBlockHelper.cs" />

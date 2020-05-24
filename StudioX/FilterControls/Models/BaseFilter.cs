@@ -9,6 +9,7 @@ namespace StudioX.FilterControls.Models
     /// <summary>
     /// 筛选器基类
     /// </summary>
+    [Serializable]
     public class BaseFilter : PropertyChangeBase
     {
        
