@@ -36,12 +36,12 @@ namespace StudioX.FilterControls.Models
             }
         }
 
-        private string _compairOperator;
+        private CompairOperators _compairOperator;
 
         /// <summary>
         /// 比较运算符
         /// </summary>
-        public string CompairOperator
+        public CompairOperators CompairOperator
         {
             get { return _compairOperator; }
             set

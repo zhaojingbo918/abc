@@ -72,6 +72,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FilterControls\TextBlockHelper.cs" />
     <Compile Include="FilterControls\FilterItemEditor.xaml.cs">
       <DependentUpon>FilterItemEditor.xaml</DependentUpon>
     </Compile>
@@ -81,6 +82,7 @@
     <Compile Include="FilterControls\Models\AdvanceFilter.cs" />
     <Compile Include="FilterControls\Models\BaseFilter.cs" />
     <Compile Include="FilterControls\Models\BasicFilter.cs" />
+    <Compile Include="FilterControls\Models\CompairOperators.cs" />
     <Compile Include="FilterControls\Models\FilterCondition.cs" />
     <Compile Include="FilterControls\Models\FilterItem.cs" />
     <Compile Include="FilterControls\Models\PropertyChangeBase.cs" />
@@ -96,6 +98,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Styles\CompairOperators.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Fonts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -105,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\ListBoxStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\RadiaButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

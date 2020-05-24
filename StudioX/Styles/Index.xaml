@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:StudioX.Styles">
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="CompairOperators.xaml" />
         <ResourceDictionary Source="Fonts.xaml" />
         <!--<ResourceDictionary Source="ComboboxStyles.xaml" />-->
         <ResourceDictionary Source="ScrollViewStyles.xaml" />
@@ -12,8 +13,8 @@
         <!--<ResourceDictionary Source="TabControlStyle.xaml" />-->
         <ResourceDictionary Source="WindowStyle.xaml" />
       <ResourceDictionary Source="TextBlockStyle.xaml" />
-        <!--<ResourceDictionary Source="RadiaButtonStyle.xaml" />
-        <ResourceDictionary Source="ToogleButtonStyle.xaml" />
+     <ResourceDictionary Source="RadiaButtonStyle.xaml" />
+        <!--  <ResourceDictionary Source="ToogleButtonStyle.xaml" />
         <ResourceDictionary Source="RectangleStyle.xaml" />
         <ResourceDictionary Source="DesignerItemStyles.xaml" />--> 
     </ResourceDictionary.MergedDictionaries>

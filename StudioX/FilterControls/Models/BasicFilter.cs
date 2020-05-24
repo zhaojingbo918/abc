@@ -12,7 +12,7 @@ namespace StudioX.FilterControls.Models
     /// </summary>
     public class BasicFilter : BaseFilter
     {
-        private ObservableCollection<FilterItem> _filters;
+        private ObservableCollection<FilterItem> _filters = new ObservableCollection<FilterItem>();
 
         /// <summary>
         /// 筛选项

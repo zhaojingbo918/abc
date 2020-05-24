@@ -21,11 +21,12 @@ namespace StudioX.FilterControls
     /// </summary>
     public partial class FilterItemEditor : Window
     {
-        private ObservableCollection<FilterCondition> _conditions = new ObservableCollection<FilterCondition>();
+        private BaseFilter _baseFilter = new BasicFilter();
         public FilterItemEditor()
         {
             InitializeComponent();
-            this.listboxFilter.ItemsSource = _conditions;
+            this.DataContext = _baseFilter;
+            //    this.listboxFilter.ItemsSource = _conditions;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -53,13 +54,10 @@ namespace StudioX.FilterControls
         /// <param name="e"></param>
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var condition = new FilterCondition() { Mode = FilterCondition.ModeBasic, Filter = new BasicFilter() };
-            _conditions.Add(condition);
+            var condition = new FilterItem() { LeftValue = "值", CompairOperator = CompairOperators.Equal };
+            (_baseFilter as BasicFilter).Filters.Add(condition);
         }
 
-        private void BtnConfig_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
     }
 }
