@@ -10,7 +10,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        mc:Ignorable="d">
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance models:FilterCondition}">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -141,16 +142,25 @@
             <StackPanel Orientation="Horizontal"
                         Margin="20,15,0,15">
                 <RadioButton Content="基本筛选器"
-                             IsChecked="True"
+                             x:Name="rbtBasic"
+                             Tag="{x:Static local:ComonStrings.ModeBasic}"
+                             Click="RbtnMode_Click"
+                             IsChecked="{Binding Mode,Converter={x:Static local:Equal2BooleanConverter.Instance},ConverterParameter={x:Static local:ComonStrings.ModeBasic},Mode=OneWay}"
                              Margin="0"
                              Style="{StaticResource rbtIndicatorType}" />
                 <RadioButton Content="高级筛选器"
+                             x:Name="rbtAdvance"
                              Margin="33,0,0,0"
+                             Tag="{x:Static local:ComonStrings.ModeAdvance}"
+                             Click="RbtnMode_Click"
+                             IsChecked="{Binding Mode,Converter={x:Static local:Equal2BooleanConverter.Instance},ConverterParameter={x:Static local:ComonStrings.ModeAdvance},Mode=OneWay}"
                              Style="{StaticResource rbtIndicatorType}" />
             </StackPanel>
 
-            <!--基本-->
+            <!--基本筛选器-->
             <Grid Grid.Row="1"
+                  Visibility="{Binding ElementName=rbtBasic,Path=IsChecked,Converter={x:Static local:Boolean2VisibilityConverter.Instance},Mode=OneWay}"
+                  DataContext="{Binding Filter}"
                   d:DataContext="{d:DesignInstance models:BasicFilter}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -278,8 +288,8 @@
                                         <Rectangle Style="{StaticResource recSpliter}"
                                                    Grid.Column="1" />
                                         <TextBox Text="{Binding RightValue,Mode=TwoWay}"
-                                                   Style="{StaticResource tboxCellValue}"
-                                                   Grid.Column="2" />
+                                                 Style="{StaticResource tboxCellValue}"
+                                                 Grid.Column="2" />
 
 
                                     </Grid>
@@ -295,6 +305,140 @@
                 </Border>
 
             </Grid>
+            <!--基本筛选器结束-->
+
+            <!--高级筛选器-->
+
+            <Grid Grid.Row="1"
+                  Visibility="{Binding ElementName=rbtAdvance,Path=IsChecked,Converter={x:Static local:Boolean2VisibilityConverter.Instance},Mode=OneWay}"
+                  DataContext="{Binding Filter}"
+                  d:DataContext="{d:DesignInstance models:AdvanceFilter}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid Margin="20,0,20,0">
+                    <TextBlock Text="添加"
+                               Style="{StaticResource tbTitle}"
+                               HorizontalAlignment="Left" />
+                </Grid>
+
+                <Border BorderThickness="1"
+                        BorderBrush="#ddd"
+                        Background="White"
+                        Grid.Row="1"
+                        Margin="20,5,20,10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition  Height="25" />
+                            <RowDefinition  Height="25" />
+                            <RowDefinition  Height="25" />
+                            <RowDefinition  Height="25" />
+                        </Grid.RowDefinitions>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Style="{StaticResource recSpliter}" />
+                            <TextBlock Text="运算符"
+                                       Style="{StaticResource tbCellHeader}"
+                                       Grid.Column="1" />
+                            <Rectangle Style="{StaticResource recSpliter}"
+                                       Grid.Column="1" />
+                            <TextBlock Text="值"
+                                       Style="{StaticResource tbCellHeader}"
+                                       Grid.Column="2" />
+                            <Rectangle Style="{StaticResource recRowSpliter}" />
+
+                        </Grid>
+
+                        <Grid Grid.Row="1"
+                              DataContext="{Binding FilterItem1}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding LeftValue}"
+                                       Style="{StaticResource tbCellValue}" />
+                            <Rectangle Style="{StaticResource recSpliter}" />
+                            <TextBlock  Tag="lanCompairOp"
+                                        local:TextBlockHelper.TextResourceKey="{Binding CompairOperator, Mode=OneWay}"
+                                        Style="{StaticResource tbCellValue}"
+                                        Grid.Column="1" />
+                            <Rectangle Style="{StaticResource recSpliter}"
+                                       Grid.Column="1" />
+                            <TextBox Text="{Binding RightValue,Mode=TwoWay}"
+                                     Style="{StaticResource tboxCellValue}"
+                                     Grid.Column="2" />
+                            <Rectangle Style="{StaticResource recRowSpliter}" />
+
+                        </Grid>
+
+                        <Grid Grid.Row="2">
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="13,0,0,0">
+                                <RadioButton Content="与"
+                                             Tag="{x:Static local:ComonStrings.LogicalAnd}"
+                                             GroupName="logical"
+                                             Margin="0"
+                                             Click="RbtnLogicalOperator_Click"
+                                             IsChecked="{Binding LogicalOperator,Converter={x:Static local:Equal2BooleanConverter.Instance},ConverterParameter={x:Static local:ComonStrings.LogicalAnd},Mode=OneWay}"
+                                             Style="{StaticResource rbtIndicatorType}" />
+                                <RadioButton Content="或"
+                                             Tag="{x:Static local:ComonStrings.LogicalOr}"
+                                             Click="RbtnLogicalOperator_Click"
+                                             IsChecked="{Binding LogicalOperator,Converter={x:Static local:Equal2BooleanConverter.Instance},ConverterParameter={x:Static local:ComonStrings.LogicalOr},Mode=OneWay}"
+                                             GroupName="logical"
+                                             Margin="33,0,0,0"
+                                             Style="{StaticResource rbtIndicatorType}" />
+                            </StackPanel>
+
+
+                            <Rectangle Style="{StaticResource recRowSpliter}" />
+
+                        </Grid>
+
+
+                        <Grid Grid.Row="3"
+                              DataContext="{Binding FilterItem2}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding LeftValue}"
+                                       Style="{StaticResource tbCellValue}" />
+                            <Rectangle Style="{StaticResource recSpliter}" />
+                            <TextBlock  Tag="lanCompairOp"
+                                        local:TextBlockHelper.TextResourceKey="{Binding CompairOperator, Mode=OneWay}"
+                                        Style="{StaticResource tbCellValue}"
+                                        Grid.Column="1" />
+                            <Rectangle Style="{StaticResource recSpliter}"
+                                       Grid.Column="1" />
+                            <TextBox Text="{Binding RightValue,Mode=TwoWay}"
+                                     Style="{StaticResource tboxCellValue}"
+                                     Grid.Column="2" />
+                            <Rectangle Style="{StaticResource recRowSpliter}" />
+
+                        </Grid>
+
+
+                    </Grid>
+
+
+                </Border>
+
+            </Grid>
+
+
+            <!--高级筛选器结束-->
+
+
         </Grid>
         <Grid Grid.Row="2">
             <Rectangle Height="1"

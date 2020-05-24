@@ -53,7 +53,7 @@ namespace StudioX.FilterControls
         /// <param name="e"></param>
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var condition = new FilterCondition() { Mode = FilterCondition.ModeBasic, Filter = new BasicFilter() };
+            var condition = new FilterCondition() { Mode = ComonStrings.ModeBasic, Filter = new BasicFilter() };
             _conditions.Add(condition);
         }
 

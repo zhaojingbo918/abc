@@ -21,12 +21,15 @@ namespace StudioX.FilterControls
     /// </summary>
     public partial class FilterItemEditor : Window
     {
-        private BaseFilter _baseFilter = new BasicFilter();
+        //    private BaseFilter _baseFilter = new AdvanceFilter() { FilterItem1 = new FilterItem() { LeftValue = "值" }, FilterItem2 = new FilterItem() { LeftValue = "值" } };
+
+        private FilterCondition _filterCondition = new FilterCondition() { Mode = ComonStrings.ModeBasic };
+
         public FilterItemEditor()
         {
             InitializeComponent();
-            this.DataContext = _baseFilter;
-            //    this.listboxFilter.ItemsSource = _conditions;
+            this.DataContext = _filterCondition;
+            this.InitFilter();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -55,9 +58,51 @@ namespace StudioX.FilterControls
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             var condition = new FilterItem() { LeftValue = "值", CompairOperator = CompairOperators.Equal };
-            (_baseFilter as BasicFilter).Filters.Add(condition);
+            (_filterCondition.Filter as BasicFilter).Filters.Add(condition);
+        }
+
+        /// <summary>
+        /// and or
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RbtnLogicalOperator_Click(object sender, RoutedEventArgs e)
+        {
+            (_filterCondition.Filter as AdvanceFilter).LogicalOperator = (sender as RadioButton).Tag.ToString();
+        }
+
+        /// <summary>
+        /// 模式改变
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RbtnMode_Click(object sender, RoutedEventArgs e)
+        {
+            _filterCondition.Mode = (sender as RadioButton).Tag.ToString();
+            this.InitFilter();
         }
 
 
+        private void InitFilter()
+        {
+            if (_filterCondition.Mode == ComonStrings.ModeBasic)
+            {
+                if (_filterCondition.Filter is BasicFilter == false)
+                {
+                    _filterCondition.Filter = new BasicFilter() { };
+                }
+            }
+            else
+            {
+                if (_filterCondition.Filter is AdvanceFilter == false)
+                {
+                    _filterCondition.Filter = new AdvanceFilter()
+                    {
+                        FilterItem1 = new FilterItem() { LeftValue = "值" },
+                        FilterItem2 = new FilterItem() { LeftValue = "值" }
+                    };
+                }
+            }
+        }
     }
 }

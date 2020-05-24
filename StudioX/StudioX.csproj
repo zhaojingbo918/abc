@@ -72,6 +72,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FilterControls\Boolean2VisibilityConverter.cs" />
+    <Compile Include="FilterControls\ComonStrings.cs" />
+    <Compile Include="FilterControls\Equal2BooleanConverter.cs" />
     <Compile Include="FilterControls\TextBlockHelper.cs" />
     <Compile Include="FilterControls\FilterItemEditor.xaml.cs">
       <DependentUpon>FilterItemEditor.xaml</DependentUpon>

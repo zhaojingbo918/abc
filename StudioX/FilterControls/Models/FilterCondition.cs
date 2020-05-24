@@ -13,10 +13,7 @@ namespace StudioX.FilterControls.Models
     /// </summary>
     public class FilterCondition : PropertyChangeBase
     {
-        public const string ModeBasic = "basic";
-        public const string ModeAdvance = "advance";
-
-        private string _mode = FilterCondition.ModeBasic;
+        private string _mode = ComonStrings.ModeBasic;
 
         /// <summary>
         /// 模式，basic|advance

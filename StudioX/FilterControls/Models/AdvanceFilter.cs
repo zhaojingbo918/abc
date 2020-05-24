@@ -24,9 +24,8 @@ namespace StudioX.FilterControls.Models
         }
 
 
-        private string _logicalOperator
+        private string _logicalOperator = ComonStrings.LogicalAnd;
 
-;
         /// <summary>
         /// 逻辑运算符 and|or
         /// </summary>
@@ -39,8 +38,6 @@ namespace StudioX.FilterControls.Models
                 this.OnPropertyChanged(nameof(LogicalOperator));
             }
         }
-
-
 
         private FilterItem _filterItem2;
 
