@@ -1,0 +1,256 @@
+﻿<Window x:Class="StudioX.FilterControls.FilterEditor"
+        x:Name="uc"
+        Height="363"
+        Width="500"
+        Style="{DynamicResource PopupWindowStyle}"
+        WindowStartupLocation="CenterScreen"
+        xmlns:models="clr-namespace:StudioX.FilterControls.Models"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Index.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="TextBlock"
+                   x:Key="tbTitle">
+                <Setter Property="FontSize"
+                        Value="12" />
+                <Setter Property="Foreground"
+                        Value="#333" />
+                <Setter Property="VerticalAlignment"
+                        Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown"
+              Background="Transparent">
+            <Rectangle Height="1"
+                       VerticalAlignment="Bottom"
+                       Fill="#FFDDDDDD" />
+            <TextBlock HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Text="筛选"
+                       FontWeight="Bold"
+                       FontSize="14"
+                       Foreground="#333333"
+                       Margin="20,0,0,0">
+      <Run Style="{StaticResource StartPageRun1}"
+                FontWeight="Regular"
+                FontSize="15"
+                Foreground="#FF454859"
+                Text="{DynamicResource lanSaveRuleSequence}" />
+            </TextBlock>
+            <Button Style="{StaticResource ContentButton}"
+                    HorizontalAlignment="Right"
+                    Cursor="Hand"
+                    Click="Button_Click">
+                <TextBlock Text="&#58893;"
+                           Margin="12"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           TextBlock.FontFamily="{StaticResource iconfont}" />
+            </Button>
+
+        </Grid>
+        <Grid Grid.Row="1"
+              Background="#FAFAFA">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid Margin="20,15,20,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock  Style="{StaticResource tbTitle}"
+                            Text="源范围：" />
+                <TextBox Grid.Column="1"
+                         Foreground="#454859"
+                         IsReadOnly="True"
+                         VerticalAlignment="Center"
+                         VerticalContentAlignment="Center"
+                         Margin="10 0 0 0"
+                         Height="30"
+                         Text="[Notes] Date" />
+            </Grid>
+            <Grid Grid.Row="1"
+                  Margin="20,0,20,0">
+                <TextBlock Text="列名称"
+                           Style="{StaticResource tbTitle}"
+                           HorizontalAlignment="Left" />
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                    <CheckBox Content="清除任何现有条件"
+                              Foreground="#999" />
+                    <Button Style="{StaticResource btnEmptyButton}"
+                            Click="BtnAdd_Click"
+                            Margin="18,0,4,0">
+                        <Border CornerRadius="3"
+                                Background="Transparent"
+                                Width="14"
+                                Height="14"
+                                BorderThickness="1"
+                                BorderBrush="#ccc">
+                            <Path Stroke="#666"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Width="8"
+                                  Height="8">
+                                <Path.Data>
+
+                                    <PathGeometry>
+
+                                        <PathFigure StartPoint="4,0">
+                                            <PolyLineSegment Points="4,8" />
+                                        </PathFigure>
+                                        <PathFigure StartPoint="0,4">
+                                            <PolyLineSegment Points="8,4" />
+                                        </PathFigure>
+
+                                    </PathGeometry>
+
+                                </Path.Data>
+                            </Path>
+                        </Border>
+                    </Button>
+
+                    <Button Style="{StaticResource btnEmptyButton}">
+                        <Border CornerRadius="3"
+                                Width="14"
+                                Height="14"
+                                Background="Transparent"
+                                BorderThickness="1"
+                                BorderBrush="#ccc">
+                            <Path Stroke="#666"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Width="8"
+                                  Height="8">
+                                <Path.Data>
+                                    <PathGeometry>
+                                        <PathFigure StartPoint="0,4">
+                                            <PolyLineSegment Points="8,4" />
+                                        </PathFigure>
+                                    </PathGeometry>
+
+                                </Path.Data>
+                            </Path>
+                        </Border>
+
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <ListBox Grid.Row="2"
+                     x:Name="listboxFilter"
+                     Margin="20,5,20,10"
+                     Style="{StaticResource lbStyleSelectIndicator}"
+                     HorizontalContentAlignment="Stretch"
+                     ItemContainerStyle="{StaticResource lbiStyleFilterCondition}"
+                     BorderBrush="#ddd">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="models:FilterCondition">
+                        <Grid>
+                            <TextBlock Text="[Notes] Date!LastWeekMonday"
+                                       HorizontalAlignment="Left" />
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Right">
+                                <Button Style="{StaticResource btnEmptyButton}"
+                                        Click="BtnAdd_Click">
+                                    <Border CornerRadius="3"
+                                            Background="Transparent"
+                                            Width="14"
+                                            Height="14"
+                                            BorderThickness="1"
+                                            BorderBrush="#ccc">
+                                        <Path Stroke="#666"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Width="8"
+                                              Height="8">
+                                            <Path.Data>
+
+                                                <PathGeometry>
+
+                                                    <PathFigure StartPoint="4,0">
+                                                        <PolyLineSegment Points="4,8" />
+                                                    </PathFigure>
+                                                    <PathFigure StartPoint="0,4">
+                                                        <PolyLineSegment Points="8,4" />
+                                                    </PathFigure>
+
+                                                </PathGeometry>
+
+                                            </Path.Data>
+                                        </Path>
+                                    </Border>
+                                </Button>
+
+                                <Rectangle Width="1"
+                                           Height="16"
+                                           VerticalAlignment="Center"
+                                           Fill="#FFE7E7E7"
+                                           StrokeThickness="0"
+                                           Margin="10,0,10,0" />
+                                <Button Content="配置条件"
+                                        Click="BtnConfig_Click"
+                                        Style="{StaticResource btnDelete}"
+                                        FontFamily="微软雅黑"
+                                        Foreground="#4B8AF4"
+                                        Margin="0,0,10,0" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+            </ListBox>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Rectangle Height="1"
+                       VerticalAlignment="Top"
+                       Fill="#FFDDDDDD" />
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Margin="0,0,20,0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right">
+                <Button Name="ConfirmButton"
+                        Style="{StaticResource BlueButton}"
+                        Width="90"
+                        Height="30"
+                        FontSize="14"
+                        Content="确定"
+                        Margin="0,0,0,0"
+                        IsDefault="True"
+                        Click="ConfirmButton_Click" />
+                <Button Name="CancelButton"
+                        Style="{StaticResource BlueButton}"
+                        Width="90"
+                        Height="30"
+                        FontSize="14"
+                        Background="#FFFAFAFA"
+                        Foreground="#FF454859"
+                        Content="取消"
+                        Margin="20,0,0,0"
+                        IsCancel="True"
+                        Click="CancelButton_Click" />
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</Window>
